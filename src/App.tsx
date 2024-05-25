@@ -44,6 +44,7 @@ const reducer = (state: any, action: any) => {
     case "deposit":
       return {
         ...state,
+        balance: state.balance + 150,
         // isActive: false,
       };
 
