@@ -58,6 +58,8 @@ const reducer = (state: any, action: any) => {
     case "requestLoan":
       return {
         ...state,
+        loan: state.loan + 5000,
+        balance: state.balance + state.loan,
         // isActive: false,
       };
 
