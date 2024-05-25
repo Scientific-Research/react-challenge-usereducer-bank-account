@@ -1,3 +1,4 @@
+import { useReducer } from "react";
 import "./index.css";
 
 /*
@@ -21,43 +22,117 @@ INSTRUCTIONS / CONSIDERATIONS:
 const initialState = {
   balance: 0,
   loan: 0,
-  isActive: false
+  isActive: false,
+};
+
+/**
+ * 2. Use a reducer to model the following state transitions: openAccount, deposit, withdraw, requestLoan, payLoan, closeAccount. Use the `initialState` below to get started.
+ * 
+ * 
+3. All operations (expect for opening account) can only be performed if isActive is true. If it's not, just return the original state object. You can check this right at the beginning of the reducer
+ * 
+ */
+const reducer = (state: any, action: any) => {
+  switch (action.type) {
+    case "openAccount":
+      return {
+        ...state,
+        balance: state.balance + 500,
+        isActive: true,
+      };
+
+    case "deposit":
+      return {
+        ...state,
+        // isActive: false,
+      };
+
+    case "withdraw":
+      return {
+        ...state,
+        // isActive: false,
+      };
+
+    case "requestLoan":
+      return {
+        ...state,
+        // isActive: false,
+      };
+
+    case "payLoan":
+      return {
+        ...state,
+        // isActive: false,
+      };
+
+    case "closeAccount":
+      return {
+        ...state,
+        // isActive: false,
+      };
+
+    default:
+      break;
+  }
 };
 
 export default function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const { balance, loan, isActive } = state;
+
+  const openAccount = () => {
+    dispatch({ type: "openAccount" });
+  };
+  const deposit = () => {
+    dispatch({ type: "deposit" });
+  };
+  const withdraw = () => {
+    dispatch({ type: "withdraw" });
+  };
+  const requestLoan = () => {
+    dispatch({ type: "requestLoan" });
+  };
+  const payLoan = () => {
+    dispatch({ type: "payLoan" });
+  };
+  const closeAccount = () => {
+    dispatch({ type: "closeAccount" });
+  };
+
   return (
     <div className="App">
       <h1>useReducer Bank Account</h1>
-      <p>Balance: X</p>
-      <p>Loan: X</p>
+      <p>Balance: {balance}</p>
+      <p>Loan: {loan}</p>
 
       <p>
-        <button onClick={() => {}} disabled={false}>
+        <button onClick={openAccount} disabled={isActive}>
           Open account
         </button>
       </p>
       <p>
-        <button onClick={() => {}} disabled={false}>
+        <button onClick={deposit} disabled={false}>
           Deposit 150
         </button>
       </p>
       <p>
-        <button onClick={() => {}} disabled={false}>
+        <button onClick={withdraw} disabled={false}>
           Withdraw 50
         </button>
       </p>
       <p>
-        <button onClick={() => {}} disabled={false}>
+        <button onClick={requestLoan} disabled={false}>
           Request a loan of 5000
         </button>
       </p>
       <p>
-        <button onClick={() => {}} disabled={false}>
+        <button onClick={payLoan} disabled={false}>
           Pay loan
         </button>
       </p>
       <p>
-        <button onClick={() => {}} disabled={false}>
+        <button onClick={closeAccount} disabled={false}>
           Close account
         </button>
       </p>
