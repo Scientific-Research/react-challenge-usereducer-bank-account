@@ -51,6 +51,7 @@ const reducer = (state: any, action: any) => {
     case "withdraw":
       return {
         ...state,
+        balance: state.balance - 50,
         // isActive: false,
       };
 
