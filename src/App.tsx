@@ -33,12 +33,22 @@ const initialState = {
  * 
  */
 const reducer = (state: any, action: any) => {
+  // state.balance === 0 ? (action.payload = true) : (action.payload = false);
+
+  // if (state.isActive) return initialState;
+
+  // if (state.balance === 0) {
+  //   state.isActive = true;
+  // }
+
   switch (action.type) {
     case "openAccount":
       return {
         ...state,
         balance: state.balance + 500,
-        isActive: true,
+        // isActive: true,
+        // balance: (action.payload = true),
+        isActive: action.payload,
       };
 
     case "deposit":
@@ -46,6 +56,8 @@ const reducer = (state: any, action: any) => {
         ...state,
         balance: state.balance + 150,
         // isActive: false,
+        // isActive: state.balance > 0 ? true : action.payload,
+        isActive: action.payload,
       };
 
     case "withdraw":
@@ -53,6 +65,7 @@ const reducer = (state: any, action: any) => {
         ...state,
         balance: state.balance - 50,
         // isActive: false,
+        isActive: action.payload,
       };
 
     case "requestLoan":
@@ -61,6 +74,7 @@ const reducer = (state: any, action: any) => {
         balance: state.balance + (state.loan + 5000),
         loan: state.loan + 5000,
         // isActive: false,
+        isActive: action.payload,
       };
 
     case "payLoan":
@@ -69,6 +83,7 @@ const reducer = (state: any, action: any) => {
         balance: state.balance - (state.loan + 5000),
         loan: (state.loan = 0),
         // isActive: false,
+        isActive: action.payload,
       };
 
     case "closeAccount":
@@ -76,6 +91,7 @@ const reducer = (state: any, action: any) => {
         ...state,
 
         // isActive: false,
+        isActive: action.payload,
       };
 
     default:
@@ -88,24 +104,32 @@ export default function App() {
 
   const { balance, loan, isActive } = state;
 
+  // state.isActive: state.balance > 0 ? true : action.payload;
+
+  // if (state.balance === 0) {
+  //   dispatch({ type: "deposit", paylod: true });
+  // }
+
   const openAccount = () => {
-    dispatch({ type: "openAccount" });
+    dispatch({ type: "openAccount", payload: true });
   };
   const deposit = () => {
-    dispatch({ type: "deposit" });
+    dispatch({ type: "deposit", payload: false });
   };
   const withdraw = () => {
-    dispatch({ type: "withdraw" });
+    dispatch({ type: "withdraw", payload: true });
   };
   const requestLoan = () => {
-    dispatch({ type: "requestLoan" });
+    dispatch({ type: "requestLoan", payload: true });
   };
   const payLoan = () => {
-    dispatch({ type: "payLoan" });
+    dispatch({ type: "payLoan", payload: true });
   };
   const closeAccount = () => {
-    dispatch({ type: "closeAccount" });
+    dispatch({ type: "closeAccount", payload: true });
   };
+
+  // isActive: state.balance > 0 ? true : action.payload;
 
   return (
     <div className="App">
@@ -114,32 +138,44 @@ export default function App() {
       <p>Loan: {loan}</p>
 
       <p>
-        <button onClick={openAccount} disabled={isActive}>
+        <button
+          onClick={openAccount}
+          disabled={state.balance === 0 ? false : true}
+        >
           Open account
         </button>
       </p>
       <p>
-        <button onClick={deposit} disabled={false}>
+        <button onClick={deposit} disabled={state.balance === 0 ? true : false}>
           Deposit 150
         </button>
       </p>
       <p>
-        <button onClick={withdraw} disabled={false}>
+        <button
+          onClick={withdraw}
+          disabled={state.balance === 0 ? true : false}
+        >
           Withdraw 50
         </button>
       </p>
       <p>
-        <button onClick={requestLoan} disabled={false}>
+        <button
+          onClick={requestLoan}
+          disabled={state.balance === 0 ? true : false}
+        >
           Request a loan of 5000
         </button>
       </p>
       <p>
-        <button onClick={payLoan} disabled={false}>
+        <button onClick={payLoan} disabled={state.balance === 0 ? true : false}>
           Pay loan
         </button>
       </p>
       <p>
-        <button onClick={closeAccount} disabled={false}>
+        <button
+          onClick={closeAccount}
+          disabled={state.balance === 0 ? true : false}
+        >
           Close account
         </button>
       </p>
