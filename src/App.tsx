@@ -111,32 +111,32 @@ export default function App() {
       <p>Loan: {loan}</p>
 
       <p>
-        <button onClick={openAccount} disabled={activeButton}>
+        <button onClick={openAccount} disabled={isActive}>
           Open account
         </button>
       </p>
       <p>
-        <button onClick={deposit} disabled={!activeButton}>
+        <button onClick={deposit} disabled={!isActive}>
           Deposit 150
         </button>
       </p>
       <p>
-        <button onClick={withdraw} disabled={!activeButton}>
+        <button onClick={withdraw} disabled={!isActive}>
           Withdraw 50
         </button>
       </p>
       <p>
-        <button onClick={requestLoan} disabled={!activeButton}>
+        <button onClick={requestLoan} disabled={!isActive}>
           Request a loan of 5000
         </button>
       </p>
       <p>
-        <button onClick={payLoan} disabled={!activeButton}>
+        <button onClick={payLoan} disabled={!isActive}>
           Pay loan
         </button>
       </p>
       <p>
-        <button onClick={closeAccount} disabled={!activeButton}>
+        <button onClick={closeAccount} disabled={!isActive}>
           Close account
         </button>
       </p>
