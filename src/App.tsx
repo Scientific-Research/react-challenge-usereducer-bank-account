@@ -110,9 +110,12 @@ export default function App() {
   //   dispatch({ type: "deposit", paylod: true });
   // }
 
+  let activeButton =
+    state.balance === 0 && state.loan === 0 && !state.isActive ? false : true;
+
   const openAccount = () => {
     // dispatch({ type: "openAccount", payload: true });
-    dispatch({ type: "openAccount" });
+    dispatch({ type: "openAccount", payload: isActive });
   };
   const deposit = () => {
     dispatch({ type: "deposit" });
@@ -128,11 +131,17 @@ export default function App() {
     dispatch({ type: "payLoan" });
   };
   const closeAccount = () => {
+    // activeButton = false;
+    activeButton =
+      state.balance === 0 && state.loan === 0 && state.isActive ? false : true;
     if (state.balance !== 0 && state.loan !== 0) return;
     dispatch({ type: "closeAccount" });
   };
 
   // isActive: state.balance > 0 ? true : action.payload;
+
+  // const activeButton =
+  //   state.balance === 0 && state.loan === 0 && !state.isActive ? false : true;
 
   return (
     <div className="App">
@@ -141,44 +150,32 @@ export default function App() {
       <p>Loan: {loan}</p>
 
       <p>
-        <button
-          onClick={openAccount}
-          disabled={state.balance === 0 ? false : true}
-        >
+        <button onClick={openAccount} disabled={activeButton}>
           Open account
         </button>
       </p>
       <p>
-        <button onClick={deposit} disabled={state.balance === 0 ? true : false}>
+        <button onClick={deposit} disabled={!activeButton}>
           Deposit 150
         </button>
       </p>
       <p>
-        <button
-          onClick={withdraw}
-          disabled={state.balance === 0 ? true : false}
-        >
+        <button onClick={withdraw} disabled={!activeButton}>
           Withdraw 50
         </button>
       </p>
       <p>
-        <button
-          onClick={requestLoan}
-          disabled={state.balance === 0 ? true : false}
-        >
+        <button onClick={requestLoan} disabled={!activeButton}>
           Request a loan of 5000
         </button>
       </p>
       <p>
-        <button onClick={payLoan} disabled={state.balance === 0 ? true : false}>
+        <button onClick={payLoan} disabled={!activeButton}>
           Pay loan
         </button>
       </p>
       <p>
-        <button
-          onClick={closeAccount}
-          disabled={state.balance === 0 ? true : false}
-        >
+        <button onClick={closeAccount} disabled={!activeButton}>
           Close account
         </button>
       </p>
