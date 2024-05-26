@@ -68,7 +68,7 @@ const reducer = (state: any, action: any) => {
       };
 
     default:
-      break;
+      throw new Error("Unknown action!");
   }
 };
 
