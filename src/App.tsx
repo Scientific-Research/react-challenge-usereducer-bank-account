@@ -128,6 +128,7 @@ export default function App() {
     dispatch({ type: "payLoan" });
   };
   const closeAccount = () => {
+    if (state.balance !== 0 && state.loan !== 0) return;
     dispatch({ type: "closeAccount" });
   };
 
