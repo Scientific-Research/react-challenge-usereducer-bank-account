@@ -20,7 +20,7 @@ INSTRUCTIONS / CONSIDERATIONS:
 */
 
 const initialState = {
-  balance: 0,
+  balance: 10,
   loan: 0,
   isActive: false,
 };
@@ -31,6 +31,7 @@ const reducer = (state: any, action: any) => {
       return {
         ...state,
         balance: state.balance + 500,
+        isActive: true,
       };
 
     case "deposit":
