@@ -25,47 +25,24 @@ const initialState = {
   isActive: false,
 };
 
-/**
- * 2. Use a reducer to model the following state transitions: openAccount, deposit, withdraw, requestLoan, payLoan, closeAccount. Use the `initialState` below to get started.
- * 
- * 
-3. All operations (expect for opening account) can only be performed if isActive is true. If it's not, just return the original state object. You can check this right at the beginning of the reducer
- * 
- */
 const reducer = (state: any, action: any) => {
-  // state.balance === 0 ? (action.payload = true) : (action.payload = false);
-
-  // if (state.isActive) return initialState;
-
-  // if (state.balance === 0) {
-  //   state.isActive = true;
-  // }
-
   switch (action.type) {
     case "openAccount":
       return {
         ...state,
         balance: state.balance + 500,
-        // isActive: true,
-        // balance: (action.payload = true),
-        // isActive: action.payload,
       };
 
     case "deposit":
       return {
         ...state,
         balance: state.balance + 150,
-        // isActive: false,
-        // isActive: state.balance > 0 ? true : action.payload,
-        // isActive: action.payload,
       };
 
     case "withdraw":
       return {
         ...state,
         balance: state.balance - 50,
-        // isActive: false,
-        // isActive: action.payload,
       };
 
     case "requestLoan":
@@ -73,8 +50,6 @@ const reducer = (state: any, action: any) => {
         ...state,
         balance: state.balance + (state.loan + 5000),
         loan: state.loan + 5000,
-        // isActive: false,
-        // isActive: action.payload,
       };
 
     case "payLoan":
@@ -82,8 +57,6 @@ const reducer = (state: any, action: any) => {
         ...state,
         balance: state.balance - (state.loan + 5000),
         loan: (state.loan = 0),
-        // isActive: false,
-        // isActive: action.payload,
       };
 
     case "closeAccount":
@@ -104,23 +77,17 @@ export default function App() {
 
   const { balance, loan, isActive } = state;
 
-  // state.isActive: state.balance > 0 ? true : action.payload;
-
-  // if (state.balance === 0) {
-  //   dispatch({ type: "deposit", paylod: true });
-  // }
-
   let activeButton =
     state.balance === 0 && state.loan === 0 && !state.isActive ? false : true;
 
   const openAccount = () => {
-    // dispatch({ type: "openAccount", payload: true });
     dispatch({ type: "openAccount", payload: isActive });
   };
   const deposit = () => {
     dispatch({ type: "deposit" });
   };
   const withdraw = () => {
+    state.isActive = true;
     dispatch({ type: "withdraw" });
   };
   const requestLoan = () => {
@@ -128,20 +95,14 @@ export default function App() {
     dispatch({ type: "requestLoan" });
   };
   const payLoan = () => {
+    state.isActive = true;
     dispatch({ type: "payLoan" });
   };
   const closeAccount = () => {
-    // activeButton = false;
-    activeButton =
-      state.balance === 0 && state.loan === 0 && state.isActive ? false : true;
+    state.isActive = false;
     if (state.balance !== 0 && state.loan !== 0) return;
     dispatch({ type: "closeAccount" });
   };
-
-  // isActive: state.balance > 0 ? true : action.payload;
-
-  // const activeButton =
-  //   state.balance === 0 && state.loan === 0 && !state.isActive ? false : true;
 
   return (
     <div className="App">
