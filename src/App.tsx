@@ -121,6 +121,7 @@ export default function App() {
     dispatch({ type: "withdraw" });
   };
   const requestLoan = () => {
+    if (state.loan > 0) return;
     dispatch({ type: "requestLoan" });
   };
   const payLoan = () => {
