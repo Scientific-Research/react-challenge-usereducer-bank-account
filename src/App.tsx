@@ -48,7 +48,7 @@ const reducer = (state: any, action: any) => {
         balance: state.balance + 500,
         // isActive: true,
         // balance: (action.payload = true),
-        isActive: action.payload,
+        // isActive: action.payload,
       };
 
     case "deposit":
@@ -57,7 +57,7 @@ const reducer = (state: any, action: any) => {
         balance: state.balance + 150,
         // isActive: false,
         // isActive: state.balance > 0 ? true : action.payload,
-        isActive: action.payload,
+        // isActive: action.payload,
       };
 
     case "withdraw":
@@ -65,7 +65,7 @@ const reducer = (state: any, action: any) => {
         ...state,
         balance: state.balance - 50,
         // isActive: false,
-        isActive: action.payload,
+        // isActive: action.payload,
       };
 
     case "requestLoan":
@@ -74,7 +74,7 @@ const reducer = (state: any, action: any) => {
         balance: state.balance + (state.loan + 5000),
         loan: state.loan + 5000,
         // isActive: false,
-        isActive: action.payload,
+        // isActive: action.payload,
       };
 
     case "payLoan":
@@ -83,7 +83,7 @@ const reducer = (state: any, action: any) => {
         balance: state.balance - (state.loan + 5000),
         loan: (state.loan = 0),
         // isActive: false,
-        isActive: action.payload,
+        // isActive: action.payload,
       };
 
     case "closeAccount":
@@ -91,7 +91,7 @@ const reducer = (state: any, action: any) => {
         ...state,
 
         // isActive: false,
-        isActive: action.payload,
+        // isActive: action.payload,
       };
 
     default:
@@ -111,22 +111,23 @@ export default function App() {
   // }
 
   const openAccount = () => {
-    dispatch({ type: "openAccount", payload: true });
+    // dispatch({ type: "openAccount", payload: true });
+    dispatch({ type: "openAccount" });
   };
   const deposit = () => {
-    dispatch({ type: "deposit", payload: false });
+    dispatch({ type: "deposit" });
   };
   const withdraw = () => {
-    dispatch({ type: "withdraw", payload: true });
+    dispatch({ type: "withdraw" });
   };
   const requestLoan = () => {
-    dispatch({ type: "requestLoan", payload: true });
+    dispatch({ type: "requestLoan" });
   };
   const payLoan = () => {
-    dispatch({ type: "payLoan", payload: true });
+    dispatch({ type: "payLoan" });
   };
   const closeAccount = () => {
-    dispatch({ type: "closeAccount", payload: true });
+    dispatch({ type: "closeAccount" });
   };
 
   // isActive: state.balance > 0 ? true : action.payload;
