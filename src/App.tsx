@@ -30,20 +30,23 @@ const reducer = (state: any, action: any) => {
     case "openAccount":
       return {
         ...state,
-        balance: state.balance + 500,
+        // balance: state.balance + 500,
+        balance: state.balance + action.payload,
         isActive: true,
       };
 
     case "deposit":
       return {
         ...state,
-        balance: state.balance + 150,
+        // balance: state.balance + 150,
+        balance: state.balance + action.payload,
       };
 
     case "withdraw":
       return {
         ...state,
-        balance: state.balance - 50,
+        // balance: state.balance - 50,
+        balance: state.balance - action.payload,
       };
 
     case "requestLoan":
@@ -78,27 +81,33 @@ export default function App() {
 
   const { balance, loan, isActive } = state;
 
-  let activeButton =
-    state.balance === 0 && state.loan === 0 && !state.isActive ? false : true;
+  // let activeButton =
+  //   state.balance === 0 && state.loan === 0 && !state.isActive ? false : true;
 
   const openAccount = () => {
-    dispatch({ type: "openAccount", payload: isActive });
+    // dispatch({ type: "openAccount", payload: isActive });
+    dispatch({ type: "openAccount", payload: 500 });
   };
+
   const deposit = () => {
-    dispatch({ type: "deposit" });
+    dispatch({ type: "deposit", payload: 150 });
   };
+
   const withdraw = () => {
     state.isActive = true;
-    dispatch({ type: "withdraw" });
+    dispatch({ type: "withdraw", payload: 50 });
   };
+
   const requestLoan = () => {
     if (state.loan > 0) return;
     dispatch({ type: "requestLoan" });
   };
+
   const payLoan = () => {
     state.isActive = true;
     dispatch({ type: "payLoan" });
   };
+
   const closeAccount = () => {
     state.isActive = false;
     if (state.balance !== 0 && state.loan !== 0) return;
