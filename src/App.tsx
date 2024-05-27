@@ -20,7 +20,7 @@ INSTRUCTIONS / CONSIDERATIONS:
 */
 
 const initialState = {
-  balance: 10,
+  balance: 0,
   loan: 0,
   isActive: false,
 };
@@ -46,6 +46,8 @@ const reducer = (state: any, action: any) => {
       };
 
     case "withdraw":
+      // the current balance should not go to the minus value!
+      if (state.balance === 0) return state;
       return {
         ...state,
         // balance: state.balance - 50,
@@ -73,9 +75,10 @@ const reducer = (state: any, action: any) => {
       };
 
     case "closeAccount":
+      if (state.balance !== 0 || state.loan !== 0) return state;
       return {
         ...state,
-
+        isActive: false,
         // isActive: false,
         // isActive: action.payload,
       };
@@ -118,8 +121,7 @@ export default function App() {
   };
 
   const closeAccount = () => {
-    state.isActive = false;
-    if (state.balance !== 0 && state.loan !== 0) return;
+    // state.isActive = false;
     dispatch({ type: "closeAccount" });
   };
 
