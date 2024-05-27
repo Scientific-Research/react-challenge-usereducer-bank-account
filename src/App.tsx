@@ -26,6 +26,9 @@ const initialState = {
 };
 
 const reducer = (state: any, action: any) => {
+  // even i make a mistake to deactivate the below buttons except openAccount button using isActive below, with below statement, that will be guaranted! this statement means that, if isActive is not active(is false) and action.type is other than the openAccount, do nothing and back directly to state which is initialState => balance:10, loan:0, isActive:false!
+  if (!state.isActive && action.type !== "openAccount") return state;
+
   switch (action.type) {
     case "openAccount":
       return {
