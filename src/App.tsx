@@ -25,7 +25,24 @@ const initialState = {
   isActive: false,
 };
 
-const reducer = (state: any, action: any) => {
+interface IState {
+  balance: number;
+  loan: number;
+  isActive: boolean;
+}
+
+interface IAction {
+  type:
+    | "openAccount"
+    | "deposit"
+    | "withdraw"
+    | "requestLoan"
+    | "payLoan"
+    | "closeAccount";
+  payload: number;
+}
+
+const reducer = (state: IState, action: IAction) => {
   // even i make a mistake to deactivate the below buttons except openAccount button using isActive below, with below statement, that will be guaranted! this statement means that, if isActive is not active(is false) and action.type is other than the openAccount, do nothing and back directly to state which is initialState => balance:10, loan:0, isActive:false!
   if (!state.isActive && action.type !== "openAccount") return state;
 
@@ -75,13 +92,16 @@ const reducer = (state: any, action: any) => {
       };
 
     case "closeAccount":
-      // if (state.balance !== 0 || state.loan !== 0) return state; OR
+      // if (state.balance !== 0 || state.loan !== 0) return state;
       if (state.balance > 0 || state.loan > 0) return state;
+      // console.log(state);
       return {
         ...state,
         isActive: false,
+        // initialState, // in this case, both Balance and Loan were already 0 but the important thing is that, isActive would be false, in this case, all buttons will be deactivated and only Open account would be active!
         // isActive: false,
         // isActive: action.payload,
+        // ...state,
       };
 
     default:
@@ -118,12 +138,18 @@ export default function App() {
 
   const payLoan = () => {
     // state.isActive = true;
-    dispatch({ type: "payLoan" });
+    dispatch({
+      type: "payLoan",
+      payload: 0
+    });
   };
 
   const closeAccount = () => {
     // state.isActive = false;
-    dispatch({ type: "closeAccount" });
+    dispatch({
+      type: "closeAccount",
+      payload: 0
+    });
   };
 
   return (
