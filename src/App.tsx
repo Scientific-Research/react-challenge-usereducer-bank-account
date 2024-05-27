@@ -75,7 +75,8 @@ const reducer = (state: any, action: any) => {
       };
 
     case "closeAccount":
-      if (state.balance !== 0 || state.loan !== 0) return state;
+      // if (state.balance !== 0 || state.loan !== 0) return state; OR
+      if (state.balance > 0 || state.loan > 0) return state;
       return {
         ...state,
         isActive: false,
