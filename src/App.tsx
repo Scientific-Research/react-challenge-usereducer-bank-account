@@ -62,10 +62,14 @@ const reducer = (state: any, action: any) => {
       };
 
     case "payLoan":
+      // when the current balance is less than current loan, this is not possible to pay the loan, otherweise, i get the minus balance in my account. below statement prevent it to happen!
+      if (state.balance < state.loan) return state;
       return {
         ...state,
-        balance: state.balance - (state.loan + 5000),
-        loan: (state.loan = 0),
+        // balance: state.balance - (state.loan + 5000),
+        balance: state.balance - state.loan,
+        // loan: (state.loan = 0),
+        loan: 0,
       };
 
     case "closeAccount":
@@ -109,7 +113,7 @@ export default function App() {
   };
 
   const payLoan = () => {
-    state.isActive = true;
+    // state.isActive = true;
     dispatch({ type: "payLoan" });
   };
 
