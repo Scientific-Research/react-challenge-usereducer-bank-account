@@ -53,10 +53,12 @@ const reducer = (state: any, action: any) => {
       };
 
     case "requestLoan":
+      if (state.loan > 0) return state;
       return {
         ...state,
         balance: state.balance + (state.loan + 5000),
-        loan: state.loan + 5000,
+        // loan: state.loan + 5000,
+        loan: state.loan + action.payload,
       };
 
     case "payLoan":
@@ -102,8 +104,8 @@ export default function App() {
   };
 
   const requestLoan = () => {
-    if (state.loan > 0) return;
-    dispatch({ type: "requestLoan" });
+    // if (state.loan > 0) return;
+    dispatch({ type: "requestLoan", payload: 5000 });
   };
 
   const payLoan = () => {
